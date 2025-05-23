@@ -25,9 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Buscar usuario y login
     $stmt = $conn->prepare(
-        "SELECT l.password, u.id as usuario_id, u.nombre 
-         FROM login l 
-         JOIN usuario u ON l.usuario_id = u.id 
+        "SELECT l.password, u.id as usuario_id, u.nombre, r.nombre as rol
+         FROM login l
+         JOIN usuario u ON l.usuario_id = u.id
+         JOIN rol r ON u.rol_id = r.id
          WHERE l.email = ? AND u.empresa_id = ? AND u.activo = 1"
     );
     $stmt->bind_param('si', $email, $empresa_id);
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verificar si se encontró un usuario y empresa
     if ($stmt->num_rows === 1) {
-        $stmt->bind_result($hash, $usuario_id, $nombre);
+        $stmt->bind_result($hash, $usuario_id, $nombre, $rol);
         $stmt->fetch();
 
         // Verificar la contraseña
@@ -45,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario_id'] = $usuario_id;
             $_SESSION['nombre'] = $nombre;
             $_SESSION['empresa_id'] = $empresa_id;
+            $_SESSION['rol'] = $rol; // <--- Guarda el rol en la sesión
             header('Location: index.php');
             exit;
         } else {
