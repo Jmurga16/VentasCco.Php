@@ -71,121 +71,125 @@ $end_page = min($total_pages, $page_number + $range);
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <title>SAP Customer Checkout Manager - Consulter les tickets de ventes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-       /* Estilos base */
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'SAPicons', sans-serif; /* Utiliza la fuente SAPicons si está disponible */
-    font-size: 14px;
-    line-height: 1.4;
-    color: #333;
-    background-color: #F7F7F7;
-  }
+        /* Estilos base */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: 'SAPicons', sans-serif;
+            /* Utiliza la fuente SAPicons si está disponible */
+            font-size: 14px;
+            line-height: 1.4;
+            color: #333;
+            background-color: #F7F7F7;
+        }
 
-  /* Cabecera */
-  .header {
-    background-color: #F7F7F7;
-    color: #333;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+        /* Cabecera */
+        .header {
+            background-color: #F7F7F7;
+            color: #333;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  /* Botón de retroceso */
-  .back-button {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
+        /* Botón de retroceso */
+        .back-button {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
 
-  .back-button:hover {
-    color: #fff; /* Mantén el color blanco al pasar el ratón */
-    text-decoration: underline;
-  }
+        .back-button:hover {
+            color: #fff;
+            /* Mantén el color blanco al pasar el ratón */
+            text-decoration: underline;
+        }
 
-  /* Tabla */
-  .table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
+        /* Tabla */
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
 
-  th, td {
-    border: 1px solid #ddd;
-    padding: 0.8rem;
-    text-align: left;
-    background-color: #fff;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+            background-color: #fff;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-  th {
-    background-color: #f2f2f2;
-  }
+        th {
+            background-color: #f2f2f2;
+        }
 
-  /* Formulario */
-  .filters {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+        /* Formulario */
+        .filters {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-  /* Botón */
-  .btn {
-    background-color: #3f51b5;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+        /* Botón */
+        .btn {
+            background-color: #3f51b5;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-  /* Paginación */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-  }
+        /* Paginación */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
 
-  .page-item .page-link {
-    color: #333;
-    border: 1px solid #ddd;
-    padding: 0.5rem 0.8rem;
-    margin-left: 0.5rem;
-  }
+        .page-item .page-link {
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 0.5rem 0.8rem;
+            margin-left: 0.5rem;
+        }
 
-  .page-item.active .page-link {
-    background-color: #3f51b5;
-    color: #fff;
-  }
-  
-  
+        .page-item.active .page-link {
+            background-color: #3f51b5;
+            color: #fff;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <div style="display: flex; align-items: center;">
                 <span class="back-button" onclick="window.location.href='index.php';">
-    <img src="images/nav-back.png" alt="Atrás" style="width: 12px; height: auto; cursor: pointer;">
-</span>
-                
-                
+                    <img src="images/nav-back.png" alt="Atrás" style="width: 12px; height: auto; cursor: pointer;">
+                </span>
+
+
                 <img src="images/logo_sap.png" alt="Logo SAP" class="logo" onclick="window.location.href='index.php';" style="width: 80px; margin-left: 5px;" /> <!-- Reducción del tamaño del logo -->
             </div>
             <h1 style="font-size: 18px;">SAP Customer Checkout Manager - Consulter les reçus</h1>
         </div>
-        
+
         <!-- Formulario de Filtro -->
         <form method="GET" action="query_tickets.php" class="filters row">
             <div class="form-group col-md-3">
@@ -287,4 +291,5 @@ $end_page = min($total_pages, $page_number + $range);
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
