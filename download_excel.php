@@ -1,4 +1,7 @@
 <?php
+ob_clean();
+error_reporting(0);
+
 require 'vendor/autoload.php'; // Incluye PhpSpreadsheet
 include 'db.php'; // Conexión a la base de datos
 
@@ -53,6 +56,9 @@ if ($result && $result->num_rows > 0) {
         $rowIndex++;
     }
 }
+
+// Antes de los headers
+if (ob_get_length()) ob_end_clean();
 
 // Configurar encabezados para la descarga
 $filename = 'filtered_tickets.xlsx';
