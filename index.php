@@ -104,17 +104,16 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
         <h1 class="mb-2">Customer Checkout Manager</h1>
 
         <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin'): ?>
+            <button type="button" class="btn btn-warning mt-2 col-md-12" onclick="window.location.href='gestion_empresa.php'">Gestion des entreprises</button>
             <button type="button" class="btn btn-warning mt-2 col-md-12" onclick="window.location.href='gestion_usuario.php'">Gestion des utilisateurs</button>
         <?php endif; ?>
 
         <button type="submit" class="btn btn-primary mt-2 col-md-12" onclick="window.location.href='query_tickets.php'">Consulter les tickets de ventes</button>
         <button type="submit" class="btn btn-primary mt-2 col-md-12" onclick="window.location.href='sales_report.php'">Rapports de ventes</button>
 
-
         <form action="logout.php" method="POST">
             <button type="submit" class="btn btn-danger mt-2 col-md-12">Se deconnecter</button>
         </form>
-
     </div>
 </body>
 
